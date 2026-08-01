@@ -1,0 +1,15 @@
+)set break resume
+
+)co mord.as
+
+)expose UnittestCount UnittestAux Unittest
+testsuite "AldorDomain3"
+testcase "AldorDomain3"
+
+nine := toOrder(9)$MyOrder
+ten := toOrder(10)$MyOrder
+
+testEquals("true", "nine < ten")
+testEquals("false", "ten < nine")
+
+statistics()
