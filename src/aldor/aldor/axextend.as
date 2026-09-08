@@ -446,6 +446,7 @@ extend List(S: Type): with {
 	}
 
 	generator (l: %) : Generator S == generate {
+		free l;
 		while l repeat {
 			yield first l;
 			l := rest l;
@@ -545,10 +546,11 @@ extend Vector(S: Type): with {
 	generator(v: %): Generator S == {
 		n := (#v)@SI;
 		i := one();
-		generate while leq(i, n) repeat {
-			yield v.i;
-			i := inc i;
-		}
+		generate { free i;
+			while leq(i, n) repeat {
+				yield v.i;
+				i := inc i;
+		}}
 	}
 
 	#(v: %): SI ==
@@ -626,6 +628,7 @@ extend Segment (S: Type) : with {
 
 		import from S;
 		generator(x: %): Generator S == generate {
+		        free x;
 			l: S := low x;
 			h: S := high x;
 			inc: S := incrx(x)::S;

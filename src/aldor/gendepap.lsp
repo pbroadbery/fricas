@@ -309,6 +309,7 @@
         ((eq tag '|With|)       (find-deps-with     e args))
         ((eq tag '|While|)      (find-deps-while    e args))
         ((eq tag '|Yield|)      (find-deps-yield    e args))
+        ((eq tag '|Free|)       (find-deps-free    e args))
         (t                      (format t "Unknown form ~a~%" stmt)
                                 (throw '|UndefinedTag| stmt))))))
 
@@ -528,6 +529,12 @@
 ;   syntax: local X
 ;   D == an identifier or declaration
 (defun find-deps-local (env args)
+  (find-deps env (cadr args)))
+
+; (Free D)
+;   syntax: free X
+;   D == an identifier or declaration
+(defun find-deps-free (env args)
   (find-deps env (cadr args)))
 
 ; (Not A)
